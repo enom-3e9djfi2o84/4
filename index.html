@@ -1,6 +1,408 @@
-<h1>list of cat breeds</h1>
-<ul>
-  <li>Aあああああ</li>
-  <li>Bengal</li>
-  <li>Japanese bobtail</li>
-</ul>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ロマン派の偉人音楽家たち</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@400;500;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a1a12;
+    --stage:#150b09;
+    --parchment:#f4ead4;
+    --parchment-deep:#e9dcbd;
+    --wine:#7c1f2e;
+    --wine-deep:#5a1420;
+    --gold:#c9a24b;
+    --gold-light:#e3c789;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Noto Serif JP','Cormorant Garamond',serif;
+    line-height:1.9;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  h1,h2,h3{font-family:'Playfair Display','Noto Serif JP',serif; margin:0;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--stage);
+    color:var(--parchment);
+    padding:8vh 6vw 10vh;
+    overflow:hidden;
+  }
+  .hero-inner{max-width:820px; margin:0 auto; position:relative; z-index:2;}
+  .hero .eyebrow{color:var(--gold-light); margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(42px,8vw,86px);
+    font-weight:900;
+    letter-spacing:.02em;
+    line-height:1.05;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold);
+  }
+  .hero p.lead{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(18px,2.4vw,23px);
+    max-width:560px;
+    margin-top:26px;
+    color:#e9ddc4;
+  }
+  .hero-years{
+    margin-top:38px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    letter-spacing:.15em;
+    color:var(--gold-light);
+    border-top:1px solid rgba(201,162,75,.35);
+    padding-top:16px;
+    display:inline-block;
+  }
+  .staff-wrap{
+    position:absolute; inset:0; z-index:1; opacity:.55;
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro{
+    max-width:720px; margin:0 auto; padding:9vh 6vw 6vh;
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;
+  }
+  .intro p{margin:0 0 1.3em;}
+  .intro p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:64px;
+    font-weight:700;
+    float:left;
+    line-height:.8;
+    padding:6px 10px 0 0;
+    color:var(--wine);
+  }
+
+  /* ---------- TIMELINE SPINE ---------- */
+  .timeline{
+    position:relative;
+    max-width:980px;
+    margin:0 auto;
+    padding:2vh 6vw 12vh;
+  }
+  .spine{
+    position:absolute;
+    left:50%; top:0; bottom:0;
+    width:2px;
+    transform:translateX(-50%);
+    background:repeating-linear-gradient(to bottom, var(--gold) 0 6px, transparent 6px 12px);
+    z-index:0;
+  }
+  @media(max-width:760px){ .spine{left:28px;} }
+
+  .composer{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 90px 1fr;
+    align-items:start;
+    margin-bottom:64px;
+    z-index:1;
+  }
+  .composer:nth-child(even) .card{grid-column:3; text-align:left;}
+  .composer:nth-child(odd) .card{grid-column:1; text-align:right;}
+  .composer .node-col{grid-column:2; display:flex; flex-direction:column; align-items:center;}
+  .composer .year{
+    font-family:'Inter',sans-serif;
+    font-size:12px; letter-spacing:.1em;
+    color:var(--wine-deep);
+    background:var(--gold-light);
+    border-radius:20px;
+    padding:4px 12px;
+    white-space:nowrap;
+    margin-bottom:8px;
+  }
+  .node{
+    width:14px;height:14px;border-radius:50%;
+    background:var(--wine);
+    border:3px solid var(--parchment);
+    box-shadow:0 0 0 2px var(--gold);
+  }
+
+  @media(max-width:760px){
+    .composer{grid-template-columns:60px 1fr;}
+    .composer .node-col{grid-column:1; order:1;}
+    .composer:nth-child(even) .card,
+    .composer:nth-child(odd) .card{grid-column:2; text-align:left; order:2;}
+  }
+
+  .card{
+    background:var(--parchment-deep);
+    border:1px solid rgba(124,31,46,.18);
+    border-radius:3px;
+    padding:26px 30px;
+    max-width:420px;
+  }
+  .composer:nth-child(odd) .card{margin-left:auto;}
+  @media(max-width:760px){ .card{margin-left:0 !important; max-width:none;} }
+
+  .card .epithet{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    color:var(--wine);
+    font-size:16px;
+    margin-bottom:4px;
+  }
+  .card h3{
+    font-size:26px;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .card p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
+    margin:0 0 10px;
+    color:#3c2a1c;
+  }
+  .card .works{
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:.03em;
+    color:var(--wine-deep);
+    border-top:1px dashed rgba(124,31,46,.35);
+    padding-top:10px;
+    margin-top:12px;
+  }
+  .card .works b{color:var(--wine);}
+
+  /* ---------- THEMES ---------- */
+  .themes{
+    background:var(--wine-deep);
+    color:var(--parchment);
+    padding:9vh 6vw;
+  }
+  .themes-inner{max-width:920px; margin:0 auto;}
+  .themes .eyebrow{color:var(--gold-light);}
+  .themes h2{font-size:clamp(28px,4vw,40px); margin:10px 0 40px; color:#f7eedb;}
+  .theme-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:34px;
+  }
+  .theme{border-top:1px solid rgba(201,162,75,.4); padding-top:16px;}
+  .theme .num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:15px;
+  }
+  .theme h4{
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+    margin:6px 0 10px;
+    color:#f7eedb;
+  }
+  .theme p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:16.5px;
+    color:#d9cbae;
+    margin:0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:6vh 6vw;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:.08em;
+    color:#8a7355;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="staff-wrap">
+    <svg viewBox="0 0 1200 500" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M -50 420 C 150 380, 250 460, 450 400 S 750 300, 950 360 S 1150 300 1300 340"
+            fill="none" stroke="#c9a24b" stroke-width="1.4" opacity="0.55"/>
+      <path d="M -50 300 C 150 260, 250 340, 450 280 S 750 180, 950 240 S 1150 180 1300 220"
+            fill="none" stroke="#c9a24b" stroke-width="1" opacity="0.3"/>
+      <circle cx="230" cy="392" r="4" fill="#c9a24b" opacity="0.5"/>
+      <circle cx="520" cy="366" r="4" fill="#c9a24b" opacity="0.5"/>
+      <circle cx="830" cy="316" r="4" fill="#c9a24b" opacity="0.5"/>
+      <circle cx="1080" cy="352" r="4" fill="#c9a24b" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow">Music History — The Romantic Era</div>
+    <h1>ロマン派の<br><em>偉人音楽家</em>たち</h1>
+    <p class="lead">形式より感情を、規則より個性を。19世紀という時代精神が生んだ、うたうような旋律と激しい情熱の音楽家たちの物語。</p>
+    <div class="hero-years">およそ 1820s — 1900s ・ ヨーロッパ全域</div>
+  </div>
+</section>
+
+<section class="intro">
+  <p>ロマン派音楽とは、18世紀までの古典派が重んじた均整と形式美から一歩踏み出し、作曲家個人の感情、想像力、そして文学や絵画、自国の民族性といった音楽外の世界との結びつきを重視した、およそ1820年代から1900年前後にかけての音楽潮流である。</p>
+  <p>ベートーヴェンが晩年に切り拓いた個人の内面表現という扉から、この時代は始まったとされる。歌曲、標題音楽、交響詩、楽劇といった新しい形式が次々に生まれ、ピアノという楽器の可能性も限界まで追求された。世紀の後半にはナショナリズムの高まりとともに各国固有の音楽語法が花開き、世紀末には後期ロマン派として調性の限界に挑む巨大な響きが登場する。</p>
+  <p>以下では、この百年近い時代を彩った代表的な作曲家たちを、生まれた順に紹介する。</p>
+</section>
+
+<section class="timeline">
+  <div class="spine"></div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">歌曲の王</div>
+      <h3>フランツ・シューベルト</h3>
+      <p>わずか31年の生涯で600曲を超える歌曲を残し、詩と音楽を分かちがたく結びつけた。古典派の様式を残しつつも、和声の色彩感と歌うような旋律でロマン派の扉を開いた最初の一人。</p>
+      <div class="works"><b>代表作</b>「魔王」「冬の旅」交響曲第8番「未完成」</div>
+    </div>
+    <div class="node-col"><div class="year">1797–1828</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">端正な古典美の継承者</div>
+      <h3>フェリックス・メンデルスゾーン</h3>
+      <p>裕福な家庭に生まれ、幼くして完成された作曲技術を身につけた早熟の天才。バッハの「マタイ受難曲」を復活上演し、古典的均整とロマン的情感を両立させた作風で知られる。</p>
+      <div class="works"><b>代表作</b>「真夏の夜の夢」序曲 交響曲第4番「イタリア」ヴァイオリン協奏曲</div>
+    </div>
+    <div class="node-col"><div class="year">1809–1847</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">ピアノの詩人</div>
+      <h3>フレデリック・ショパン</h3>
+      <p>生涯のほとんどをピアノ独奏曲の作曲に捧げ、ポーランドの民族舞曲マズルカやポロネーズに祖国への思いを込めた。繊細な和声とルバートを駆使した、内省的で詩的な作風を確立した。</p>
+      <div class="works"><b>代表作</b>ノクターン集 バラード第1番 英雄ポロネーズ</div>
+    </div>
+    <div class="node-col"><div class="year">1810–1849</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">文学と音楽の橋渡し役</div>
+      <h3>ロベルト・シューマン</h3>
+      <p>もとは文学青年で、音楽評論家としても活躍した。物語性豊かな性格的小品や連作歌曲で内面の詩情を描き出し、妻クララとの音楽的な絆でも知られる。晩年は精神を病み悲劇的な最期を迎えた。</p>
+      <div class="works"><b>代表作</b>「子供の情景」歌曲集「詩人の恋」交響曲第3番「ライン」</div>
+    </div>
+    <div class="node-col"><div class="year">1810–1856</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">ピアノの魔術師</div>
+      <h3>フランツ・リスト</h3>
+      <p>超絶技巧のピアニストとして熱狂的な人気を博し、「交響詩」という新形式を生み出した革新者。文学的な標題を持つ管弦楽曲を通じ、音楽と物語を融合させる道を切り拓いた。</p>
+      <div class="works"><b>代表作</b>「ラ・カンパネラ」ハンガリー狂詩曲 交響詩「前奏曲」</div>
+    </div>
+    <div class="node-col"><div class="year">1811–1886</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">楽劇という総合芸術の創造者</div>
+      <h3>リヒャルト・ワーグナー</h3>
+      <p>従来のオペラを超えた「楽劇」を提唱し、台本・音楽・舞台美術を一体化させた。無限旋律と半音階を駆使した和声語法は、後の調性音楽の崩壊を予感させるほどの革新性を持つ。</p>
+      <div class="works"><b>代表作</b>楽劇「ニーベルングの指環」四部作 「トリスタンとイゾルデ」</div>
+    </div>
+    <div class="node-col"><div class="year">1813–1883</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">イタリア・オペラの巨匠</div>
+      <h3>ジュゼッペ・ヴェルディ</h3>
+      <p>人間ドラマを劇的な旋律とアンサンブルで描き切り、イタリア国民統一運動の精神的支柱ともなった。生涯を通じてオペラの人間味と劇的緊張を追求し続けた。</p>
+      <div class="works"><b>代表作</b>「椿姫」「アイーダ」「オテロ」</div>
+    </div>
+    <div class="node-col"><div class="year">1813–1901</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">古典への回帰者にして革新者</div>
+      <h3>ヨハネス・ブラームス</h3>
+      <p>ワーグナー派の標題音楽全盛の中、ベートーヴェンの伝統を継ぐ絶対音楽の道を貫いた。厳格な構成の内に深い情熱を秘めた作風から「ロマン派の中の古典主義者」と評される。</p>
+      <div class="works"><b>代表作</b>交響曲第1番 ハンガリー舞曲集 ドイツ・レクイエム</div>
+    </div>
+    <div class="node-col"><div class="year">1833–1897</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">ロシアの旋律美の体現者</div>
+      <h3>ピョートル・チャイコフスキー</h3>
+      <p>西欧の技法とロシア的な叙情性を融合させ、バレエ音楽を芸術の域にまで高めた。個人的な苦悩を昇華させた劇的で甘美な旋律は、今なお世界中で愛され続けている。</p>
+      <div class="works"><b>代表作</b>バレエ「白鳥の湖」「くるみ割り人形」交響曲第6番「悲愴」</div>
+    </div>
+    <div class="node-col"><div class="year">1840–1893</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">ボヘミアの歌</div>
+      <h3>アントニン・ドヴォルザーク</h3>
+      <p>ブラームスに見出され、チェコ民謡の語法を交響曲や室内楽に昇華させた国民楽派の代表格。渡米中に得たアメリカの黒人霊歌や先住民音楽への関心も作品に色濃く反映されている。</p>
+      <div class="works"><b>代表作</b>交響曲第9番「新世界より」スラヴ舞曲集</div>
+    </div>
+    <div class="node-col"><div class="year">1841–1904</div><div class="node"></div></div>
+  </div>
+
+  <div class="composer">
+    <div class="card">
+      <div class="epithet">後期ロマン派、世紀末の巨人</div>
+      <h3>グスタフ・マーラー</h3>
+      <p>指揮者としても名声を得ながら、生と死、自然と宇宙を巨大な編成の交響曲に描いた。調性を極限まで拡張したその響きは、ロマン派の終着点であり、20世紀音楽への架け橋となった。</p>
+      <div class="works"><b>代表作</b>交響曲第2番「復活」交響曲第5番 「大地の歌」</div>
+    </div>
+    <div class="node-col"><div class="year">1860–1911</div><div class="node"></div></div>
+  </div>
+
+</section>
+
+<section class="themes">
+  <div class="themes-inner">
+    <div class="eyebrow">Common threads</div>
+    <h2>ロマン派を貫く四つの精神</h2>
+    <div class="theme-grid">
+      <div class="theme">
+        <div class="num">i.</div>
+        <h4>個人の感情の解放</h4>
+        <p>形式の均整よりも、作曲家自身の内面の喜び・苦悩・愛を音楽に直接反映させることが重んじられた。</p>
+      </div>
+      <div class="theme">
+        <div class="num">ii.</div>
+        <h4>文学・絵画との融合</h4>
+        <p>詩や物語、絵画的情景を音楽で描く標題音楽や交響詩、歌曲が数多く生まれた。</p>
+      </div>
+      <div class="theme">
+        <div class="num">iii.</div>
+        <h4>民族性への目覚め</h4>
+        <p>各国の民謡や舞曲のリズムが取り入れられ、国民楽派と呼ばれる潮流が世紀後半に開花した。</p>
+      </div>
+      <div class="theme">
+        <div class="num">iv.</div>
+        <h4>楽器表現の極限追求</h4>
+        <p>ピアノの超絶技巧やオーケストラの巨大化により、それまでにない響きの規模と色彩が追求された。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Romantic Era Composers — a study in melody and feeling</footer>
+
+</body>
+</html>
