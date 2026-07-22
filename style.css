@@ -30,7 +30,7 @@ article {
   padding-left: 20px;
   margin-bottom: 50px;
 }
-h1, h2, p {
+h1, h2,h3,h4,h5,h6,p {
   animation: fadeIn 1.2s ease-out;
 }
 
