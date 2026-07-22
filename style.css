@@ -1,17 +1,9 @@
 
-h1 {
+h1,h2,h3,h4,h5,h6 {
   color: blue;
   font-size: 32px;
 }
-h2 {
-  color: blue;
-  font-size: 32px;}
-  h3 {
-  color: blue;
-  font-size: 32px;}
-  h4 {
-  color: blue;
-  font-size: 32px;}
+
 body {
   background-color: #f4f1ea;
   color: #222;
