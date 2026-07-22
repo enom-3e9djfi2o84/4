@@ -44,3 +44,10 @@ h1, h2, p {
     transform: translateY(0);
   }
 }
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
