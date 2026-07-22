@@ -1,0 +1,53 @@
+
+h1 {
+  color: blue;
+  font-size: 32px;
+}
+h2 {
+  color: blue;
+  font-size: 32px;}
+body {
+  background-color: #f4f1ea;
+  color: #222;
+}
+p {
+  line-height: 1.8;
+  font-size: 16px;
+}
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+h1, h2,h3,h4,h5,h6,h7,h8,h9,h10,h11 {
+  margin-top: 60px;
+}
+body {
+  font-family: "Georgia", "Yu Mincho", serif;
+}
+article {
+  border-left: 4px solid #a9822f;
+  padding-left: 20px;
+  margin-bottom: 50px;
+}
+h1, h2, p {
+  animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
