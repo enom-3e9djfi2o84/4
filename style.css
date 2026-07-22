@@ -1,8 +1,32 @@
+
 h1 {
   color: blue;
   font-size: 32px;
 }
 h2 {
   color: blue;
-  font-size: 32px;
+  font-size: 32px;}
+body {
+  background-color: #f4f1ea;
+  color: #222;
+}
+p {
+  line-height: 1.8;
+  font-size: 16px;
+}
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+h1, h2 {
+  margin-top: 60px;
+}
+body {
+  font-family: "Georgia", "Yu Mincho", serif;
+}
+article {
+  border-left: 4px solid #a9822f;
+  padding-left: 20px;
+  margin-bottom: 50px;
 }
