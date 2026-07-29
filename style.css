@@ -52,7 +52,7 @@ img:hover {
 img {
   width: 100%;
   max-width: 300px;
-  border-radius: 50%;   /* 丸くする */
+  border-radius: 50%;   
   display: block;
   margin: 20px 0;
 }
