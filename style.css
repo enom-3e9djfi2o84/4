@@ -56,7 +56,22 @@ img {
   display: block;
   margin: 20px 0;
 }
-canvas {
+#slideshow-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 60px;
+}
+
+#slideshow {
+  border: 6px solid #a9822f;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+#slideshow canvas {
   display: block;
-  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
