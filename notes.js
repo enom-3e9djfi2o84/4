@@ -9,7 +9,7 @@ const notesSketch = (p) => {
 
     p.textSize(40);
     p.noStroke();
-    p.fill(169, 130, 47, 130); // #a9822fの半透明版
+    p.fill(169, 130, 47, 130); 
 
     for (let i = 0; i < 5; i++) {
       notes.push({
@@ -20,7 +20,7 @@ const notesSketch = (p) => {
   };
 
   p.draw = function () {
-    p.clear(); // background()ではなく透明にする
+    p.clear(); 
 
     for (let n of notes) {
       p.text("♪", n.x, n.y);
