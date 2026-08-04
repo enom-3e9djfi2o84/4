@@ -10,6 +10,36 @@
  <h1>ロマン派の偉人音楽家たち</h1>
  <p>ロマン派音楽とは、19世紀のヨーロッパで花開いた音楽の潮流である。古典派が重んじた形式の均整よりも、作曲家個人の感情や想像力を音楽で表現することが重視され、詩や文学、絵画といった音楽外の世界との結びつきも強まった。歌曲や交響詩といった新しい形式が生まれ、ピアノや管弦楽の表現力は飛躍的に広がりを見せた。世紀の後半には各国固有の民族性を反映した作品も数多く生まれている。ここでは、そうした時代を彩った代表的な作曲家たちを紹介する。</p>
 </header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script>
+  let notes = [];
+
+  function setup() {
+    createCanvas(400, 200);
+    textSize(40);
+    fill(180);
+
+    for (let i = 0; i < 5; i++) {
+      notes.push({
+        x: random(0, 400),
+        y: random(50, 150)
+      });
+    }
+  }
+
+  function draw() {
+    background(240);
+
+    for (let n of notes) {
+      text("♪", n.x, n.y);
+      n.x += 2;
+      if (n.x > 400) {
+        n.x = -30;
+      }
+    }
+  }
+</script>
+
     <article>
     <h1>フランツ・シューベルト</h1>
     <img src="images/o0640085314359939761-1.jpg" alt="フランツ・シューベルトの肖像画">
