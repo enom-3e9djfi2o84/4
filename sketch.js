@@ -1,68 +1,89 @@
-let images = [];
+const slideshowSketch = (p) => {
 
-let current = 0;
-let next = 1;
+  let images = [];
+  let current = 0;
+  let next = 1;
+  let currentX = 0;
+  let nextX;
+  let moving = false;
+  let wait = 0;
+  const WAIT_TIME = 180; 
+  const SPEED = 20;
 
-let currentX = 0;
-let nextX = 800;
+  
+  const CANVAS_W = 350;
+  const CANVAS_H = 500;
 
-let moving = false;
-let wait = 0;
+  p.preload = function () {
+    images[0] = p.loadImage("images/o0640085314359939761-1.jpg");
+    images[1] = p.loadImage("images/Liszt_1858.gif");
+    images[2] = p.loadImage("images/ワーグナー.jpg");
+    images[3] = p.loadImage("images/ショパン_写真.jpeg");
+    images[4] = p.loadImage("images/Felix_Mendelssohn_(1833).jpg");
+    images[5] = p.loadImage("images/ロベルト・シューマン.jpg");
+  };
 
-const WAIT_TIME = 180; //約3秒
-const SPEED = 20;
+  p.setup = function () {
+    let canvas = p.createCanvas(CANVAS_W, CANVAS_H);
+    canvas.parent("slideshow");
+    nextX = CANVAS_W;
+  };
 
-function preload(){
+  
+  function drawImageCover(img, x, y, w, h) {
+    const imgRatio = img.width / img.height;
+    const boxRatio = w / h;
 
-  images[0] = loadImage("images/o0640085314359939761-1.jpg");
-  images[1] = loadImage("images/Liszt_1858.gif");
-  images[2] = loadImage("images/ワーグナー.jpg");
-  images[3] = loadImage("images/ショパン_写真.jpeg");
-  images[4] = loadImage("images/Felix_Mendelssohn_(1833).jpg");
-  images[5] = loadImage("images/ロベルト・シューマン.jpg");
+    let sx, sy, sw, sh;
 
-}
+    if (imgRatio > boxRatio) {
+    
+      sh = img.height;
+      sw = sh * boxRatio;
+      sx = (img.width - sw) / 2;
+      sy = 0;
+    } else {
+      
+      sw = img.width;
+      sh = sw / boxRatio;
+      sx = 0;
+      sy = (img.height - sh) / 2;
+    }
 
-function setup(){
-
-  let canvas = createCanvas(800,450);
-  canvas.parent("slideshow");
-
-}
-
-function draw(){
-
-  background(255);
-
-  image(images[current],currentX,0,width,height);
-
-  if(moving){
-    image(images[next],nextX,0,width,height);
+    p.image(img, x, y, w, h, sx, sy, sw, sh);
   }
 
-  wait++;
+  p.draw = function () {
+    p.background(255);
 
-  if(wait > WAIT_TIME && !moving){
+    drawImageCover(images[current], currentX, 0, p.width, p.height);
+
+    if (moving) {
+      drawImageCover(images[next], nextX, 0, p.width, p.height);
+    }
+
+    wait++;
+
+    if (wait > WAIT_TIME && !moving) {
       moving = true;
-  }
+    }
 
-  if(moving){
-
+    if (moving) {
       currentX -= SPEED;
       nextX -= SPEED;
 
-      if(currentX <= -width){
+      if (currentX <= -p.width) {
+        current = next;
+        next = (next + 1) % images.length;
 
-          current = next;
-          next = (next + 1) % images.length;
+        currentX = 0;
+        nextX = p.width;
 
-          currentX = 0;
-          nextX = width;
-
-          moving = false;
-          wait = 0;
+        moving = false;
+        wait = 0;
       }
+    }
+  };
+};
 
-  }
-
-}
+new p5(slideshowSketch, "slideshow");
